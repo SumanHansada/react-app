@@ -1,31 +1,21 @@
-// var -> function scoped
-// let -> block scoped
-// const -> block scoped
-// value declared with const cannot be reassigned
+// objects in JavaScript is a collection of key-value pairs
+// Function declared within the objects are called methods
+// There is a cleaner way in ES6, just declare the function without key-value pair as talk () {}
 
-function sayHello() {
-    console.log('Say Hello');
-    for (var i = 0; i < 5; i++) {
-        console.log(i);
+const person = {
+    name: "Suman",
+    walk: function () {
+
+    },
+    talk() {
+
     }
-    // But i is still accesible outside the scope
-    console.log(i);
 }
 
-sayHello();
+// accessing methods
+// if we know what properties to access we use (.) notation
+person.walk();
 
-function sayHelloAgain() {
-    console.log('Say Hello Again');
-    for (let i = 0; i < 5; i++) {
-        console.log(i);
-    }
-    // Now i is not accesible outside the scope
-    // console.log(i);
-}
-
-sayHelloAgain();
-
-const x = 1;
-// value declared with const cannot be reassigned.
-// x = 2;
-console.log(x);
+// When we don't know what properties or methods to access at run time,
+// We use bracket and quotes notation
+person['name'] = 'Kumar';

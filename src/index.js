@@ -1,21 +1,23 @@
-// objects in JavaScript is a collection of key-value pairs
-// Function declared within the objects are called methods
-// There is a cleaner way in ES6, just declare the function without key-value pair as talk () {}
+// this is very confusing in JavaScript
+// It returns the reference of current object
 
 const person = {
     name: "Suman",
     walk: function () {
-
-    },
-    talk() {
-
+        console.log(this);
     }
-}
+};
 
-// accessing methods
-// if we know what properties to access we use (.) notation
 person.walk();
+// Here this returns the reference of the person object 
+// {name: "Suman", walk: ƒ}
 
-// When we don't know what properties or methods to access at run time,
-// We use bracket and quotes notation
-person['name'] = 'Kumar';
+// Now if make slight change in code
+// function is not called here
+const walk = person.walk;
+walk();
+// Window {parent: Window, postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, …}
+
+// Value of this is determined by how a function is called
+// If you call a function as method in object, this will always return the reference to that object
+// If you call a function outside the object, this will return the global (window) object

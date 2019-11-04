@@ -9,15 +9,14 @@ const person = {
 };
 
 person.walk();
-// Here this returns the reference of the person object 
-// {name: "Suman", walk: ƒ}
 
-// Now if make slight change in code
-// function is not called here
-const walk = person.walk;
+// To fix the problem of this returning window object when called outside the object
+// We need to use the bind method
+// Every function in javascript is an object
+const walk = person.walk.bind(person);
+
+// Here the value of this is based on the arguments we pass to bind method
 walk();
-// Window {parent: Window, postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, …}
 
-// Value of this is determined by how a function is called
-// If you call a function as method in object, this will always return the reference to that object
-// If you call a function outside the object, this will return the global (window) object
+// Now this returns the person object
+// {name: "Suman", walk: ƒ}

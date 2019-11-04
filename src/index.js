@@ -1,35 +1,54 @@
-const square = function (number) {
-    return number * number;
+const person = {
+    talk() {
+        console.log('this', this);
+    }
 }
 
-// Using the Arrow Functions
-const square1 = (number) => number * number;
-console.log(square1(5));
+person.talk();
+// Here this point to person object
+// {talk: ƒ}
+// talk: ƒ talk()
 
-const jobs = [{
-        id: 1,
-        isActive: true
-    },
-    {
-        id: 2,
-        isActive: true
-    },
-    {
-        id: 3,
-        isActive: false
+const newPerson = {
+    talk() {
+        setTimeout(function () {
+            console.log('this', this);
+        }, 1000)
     }
-];
+}
 
-// Traditional Way
-const activeJobs = jobs.filter(function (job) {
-    return job.isActive;
-});
-console.log(activeJobs);
-// 0: {id: 1, isActive: true}
-// 1: {id: 2, isActive: true}
+newPerson.talk();
+// Here this points to window(global) object
+// Window {parent: Window, postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, …}
 
-// Using Arrow Function
-const activeJobs1 = jobs.filter(job => job.isActive);
-console.log(activeJobs1);
-// 0: {id: 1, isActive: true}
-// 1: {id: 2, isActive: true}
+// Reason -
+// Here callback function - function() {console.log('this', this)} is not the part of object
+// It is a standalone function
+// So callback function returns the reference of the window object
+
+// Solution -
+const anotherPerson = {
+    talk() {
+        var self = this;
+        setTimeout(function () {
+            console.log('self', self);
+        }, 1000);
+    }
+}
+
+anotherPerson.talk();
+// {talk: ƒ}
+// talk: ƒ talk()
+
+// Another way - Using Arrow Functions
+// Here this inherits the context in which it is defined
+// Arrow functions don't rebind the this keyword
+const person1 = {
+    talk() {
+        setTimeout(() => console.log('this', this), 1000)
+    }
+}
+
+person1.talk();
+// {talk: ƒ}
+// talk: ƒ talk()

@@ -1,22 +1,35 @@
-// this is very confusing in JavaScript
-// It returns the reference of current object
+const square = function (number) {
+    return number * number;
+}
 
-const person = {
-    name: "Suman",
-    walk: function () {
-        console.log(this);
+// Using the Arrow Functions
+const square1 = (number) => number * number;
+console.log(square1(5));
+
+const jobs = [{
+        id: 1,
+        isActive: true
+    },
+    {
+        id: 2,
+        isActive: true
+    },
+    {
+        id: 3,
+        isActive: false
     }
-};
+];
 
-person.walk();
+// Traditional Way
+const activeJobs = jobs.filter(function (job) {
+    return job.isActive;
+});
+console.log(activeJobs);
+// 0: {id: 1, isActive: true}
+// 1: {id: 2, isActive: true}
 
-// To fix the problem of this returning window object when called outside the object
-// We need to use the bind method
-// Every function in javascript is an object
-const walk = person.walk.bind(person);
-
-// Here the value of this is based on the arguments we pass to bind method
-walk();
-
-// Now this returns the person object
-// {name: "Suman", walk: ƒ}
+// Using Arrow Function
+const activeJobs1 = jobs.filter(job => job.isActive);
+console.log(activeJobs1);
+// 0: {id: 1, isActive: true}
+// 1: {id: 2, isActive: true}

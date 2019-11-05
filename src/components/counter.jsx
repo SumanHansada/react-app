@@ -2,10 +2,15 @@ import React, { Component } from 'react';
 
 // For using multiple html elements without div, we use React.Fragment
 class Counter extends Component {
+  // Traditional way to bind this
+  // constructor() {
+  //   super();
+  //   this.handleIncrement = this.handleIncrement.bind(this);
+  // }
+
   // state objects includes any data that a component needs
   state = {
-    count: 0,
-    tags: ['tag1', 'tag2', 'tag3']
+    count: 0
   };
 
   // we can set the styles by declaring it as an object
@@ -14,27 +19,30 @@ class Counter extends Component {
     fontWeight: 'bold'
   };
 
+  // Modern Way to bind this - Here this points to Counter class object
+  handleIncrement = () => {
+    console.log('Increment Clicked', this);
+  };
+
   render() {
     return (
-      <React.Fragment>
-        {this.state.tags.length === 0 && 'Please create a new tag'}
-        {this.renderTags()}
-      </React.Fragment>
+      <div>
+        <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
+        <button
+          onClick={this.handleIncrement}
+          className='btn btn-secondary btn-sm'
+        >
+          Increment
+        </button>
+      </div>
     );
   }
-
-  // To conditionally render the tags, we can seperate the logic in seperate method
-  renderTags() {
-    if (this.state.tags.length === 0) return <p>There are no tags!</p>;
-    return (
-      <ul>
-        {this.state.tags.map(tag => (
-          <li key={tag}>{tag}</li>
-        ))}
-      </ul>
-    );
+  // we can set classname dynamically
+  getBadgeClasses() {
+    let classes = 'badge m-2 badge-';
+    classes += this.state.count === 0 ? 'warning' : 'primary';
+    return classes;
   }
-
   formatCount() {
     const { count } = this.state;
     return count === 0 ? 'Zero' : count;

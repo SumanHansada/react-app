@@ -2,12 +2,6 @@ import React, { Component } from 'react';
 
 // For using multiple html elements without div, we use React.Fragment
 class Counter extends Component {
-  // Traditional way to bind this
-  // constructor() {
-  //   super();
-  //   this.handleIncrement = this.handleIncrement.bind(this);
-  // }
-
   // state objects includes any data that a component needs
   state = {
     count: 0
@@ -19,15 +13,17 @@ class Counter extends Component {
     fontWeight: 'bold'
   };
 
-  // Modern Way to bind this - Here this points to Counter class object
+  // Modern Way to bind this (Arrow Functions) - Here this points to Counter class object
   handleIncrement = () => {
-    console.log('Increment Clicked', this);
+    this.setState({ count: this.state.count + 1 });
   };
 
   render() {
     return (
       <div>
-        <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
+        <span style={this.styles} className={this.getBadgeClasses()}>
+          {this.formatCount()}
+        </span>
         <button
           onClick={this.handleIncrement}
           className='btn btn-secondary btn-sm'

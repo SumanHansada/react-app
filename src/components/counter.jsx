@@ -9,21 +9,31 @@ class Counter extends Component {
     fontWeight: 'bold'
   };
 
+  // This method is called after the component is updated
+  componentDidUpdate(prevProps, prevState) {
+    console.log('prevProps', prevProps);
+    console.log('prevState', prevState);
+    if (prevProps.counter.value !== this.props.counter.value) {
+      // AJAX call and get new data from server
+    }
+  }
+
   render() {
     console.log('Counter - Rendered');
+    const { counter, onIncrement, onDelete } = this.props;
     return (
       <div>
         <span style={this.styles} className={this.getBadgeClasses()}>
           {this.formatCount()}
         </span>
         <button
-          onClick={() => this.props.onIncrement(this.props.counter)}
+          onClick={() => onIncrement(counter)}
           className='btn btn-secondary btn-sm'
         >
           Increment
         </button>
         <button
-          onClick={() => this.props.onDelete(this.props.counter.id)}
+          onClick={() => onDelete(counter.id)}
           className='btn btn-danger btn-sm m-2'
         >
           Delete

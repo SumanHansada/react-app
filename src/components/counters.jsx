@@ -4,6 +4,7 @@ import Counter from './counter';
 class Counters extends Component {
   // We can pass the whole counter object instead of passing individual keys
   render() {
+    console.log('Counters - Rendered');
     const { onReset, counters, onDelete, onIncrement } = this.props;
     return (
       <div>

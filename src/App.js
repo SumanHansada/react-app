@@ -14,6 +14,18 @@ class App extends Component {
     ]
   };
 
+  // The constructor is called only once when an instance of class is created
+  constructor() {
+    super();
+    console.log('App - Constructor');
+  }
+
+  // This method is called after the component is rendered into DOM
+  // This place is perfect to make AJAX calls to get data from server
+  componentDidMount() {
+    console.log('App - Mounted');
+  }
+
   handleReset = () => {
     const counters = this.state.counters.map(c => {
       c.value = 0;
@@ -36,7 +48,9 @@ class App extends Component {
     this.setState({ counters });
   };
 
+  // When a component is rendered, all its children are rendered recursively
   render() {
+    console.log('App - Rendered');
     return (
       <React.Fragment>
         <NavBar

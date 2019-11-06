@@ -18,6 +18,14 @@ class Counter extends Component {
     }
   }
 
+  // This method is called just before a component is removed from DOM
+  // Here we can also do all kinds of clean-up like timers or listeners.
+  // We can clean those up before this component is removed from DOM
+  // Otherwise we will end up with memory leaks
+  componentWillUnmount() {
+    console.log('Counter - Unmount');
+  }
+
   render() {
     console.log('Counter - Rendered');
     const { counter, onIncrement, onDelete } = this.props;

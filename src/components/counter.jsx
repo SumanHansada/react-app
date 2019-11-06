@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 // For using multiple html elements without div, we use React.Fragment
 class Counter extends Component {
   // state objects includes any data that a component needs
+  // We can copy props to local state and then modify the value
   state = {
     value: this.props.value
   };
@@ -15,6 +16,7 @@ class Counter extends Component {
 
   // Modern Way to bind this (Arrow Functions) - Here this points to counter class object
   handleIncrement = product => {
+    // this.props.value = 0; // This cannot be done
     this.setState({ value: this.state.value + 1 });
   };
 

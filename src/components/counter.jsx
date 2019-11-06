@@ -22,10 +22,12 @@ class Counter extends Component {
     // Every react component has a property called props.
     // It includes all the attributes which we set in counters component
     // i.e. we can pass data to components using props
+    // We can also pass the children in props
     console.log('props', this.props);
 
     return (
       <div>
+        {this.props.children}
         <span style={this.styles} className={this.getBadgeClasses()}>
           {this.formatCount()}
         </span>

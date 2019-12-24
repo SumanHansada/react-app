@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
-import { getMovies } from './../services/fakeMovieService';
-import Pagination from './common/pagination';
-import { paginate } from '../utils/paginate';
-import ListGroup from './common/listGroup';
-import { getGenres } from '../services/fakeGenreService';
-import MoviesTable from './moviesTable';
-import _ from 'lodash';
+import React, { Component } from "react";
+import { getMovies } from "./../services/fakeMovieService";
+import Pagination from "./common/pagination";
+import { paginate } from "../utils/paginate";
+import ListGroup from "./common/listGroup";
+import { getGenres } from "../services/fakeGenreService";
+import { Link } from "react-router-dom";
+import MoviesTable from "./moviesTable";
+import _ from "lodash";
 
 class Movies extends Component {
   state = {
@@ -13,11 +14,11 @@ class Movies extends Component {
     genres: [],
     currentPage: 1,
     pageSize: 4,
-    sortColumn: { path: 'title', order: 'asc' }
+    sortColumn: { path: "title", order: "asc" }
   };
 
   componentDidMount() {
-    const genres = [{ _id: '', name: 'All Genres' }, ...getGenres()];
+    const genres = [{ _id: "", name: "All Genres" }, ...getGenres()];
     this.setState({ movies: getMovies(), genres });
   }
 
@@ -82,15 +83,22 @@ class Movies extends Component {
     const { totalCount, data: movies } = this.getPagedData();
 
     return (
-      <div className='row'>
-        <div className='col-3'>
+      <div className="row">
+        <div className="col-3">
           <ListGroup
             items={genres}
             selectedItem={selectedGenre}
             onItemSelect={this.handleGenreSelect}
           />
         </div>
-        <div className='col'>
+        <div className="col">
+          <Link
+            to="movies/new"
+            className="btn btn-primary"
+            style={{ marginBotton: 20 }}
+          >
+            New Movie
+          </Link>
           <p>Showing {totalCount} movies in the database.</p>
           <MoviesTable
             movies={movies}
